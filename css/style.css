@@ -1,0 +1,386 @@
+/* ─── Sakura Animation Keyframes ─────────────────────────── */
+@keyframes fall {
+   0%   { opacity: 0.9; top: 0 }
+   100% { opacity: 0.2; top: 100% }
+}
+@keyframes blow-soft-left {
+   0%   { margin-left: 0 }
+   100% { margin-left: -50% }
+}
+@keyframes blow-medium-left {
+   0%   { margin-left: 0 }
+   100% { margin-left: -100% }
+}
+@keyframes blow-soft-right {
+   0%   { margin-left: 0 }
+   100% { margin-left: 50% }
+}
+@keyframes blow-medium-right {
+   0%   { margin-left: 0 }
+   100% { margin-left: 100% }
+}
+@keyframes sway-0  { 0% { transform: rotate(-5deg) }  40% { transform: rotate(28deg) }  100% { transform: rotate(3deg) } }
+@keyframes sway-1  { 0% { transform: rotate(10deg) }  40% { transform: rotate(43deg) }  100% { transform: rotate(15deg) } }
+@keyframes sway-2  { 0% { transform: rotate(15deg) }  40% { transform: rotate(56deg) }  100% { transform: rotate(22deg) } }
+@keyframes sway-3  { 0% { transform: rotate(25deg) }  40% { transform: rotate(74deg) }  100% { transform: rotate(37deg) } }
+@keyframes sway-4  { 0% { transform: rotate(40deg) }  40% { transform: rotate(68deg) }  100% { transform: rotate(25deg) } }
+@keyframes sway-5  { 0% { transform: rotate(50deg) }  40% { transform: rotate(78deg) }  100% { transform: rotate(40deg) } }
+@keyframes sway-6  { 0% { transform: rotate(65deg) }  40% { transform: rotate(92deg) }  100% { transform: rotate(58deg) } }
+@keyframes sway-7  { 0% { transform: rotate(72deg) }  40% { transform: rotate(118deg) } 100% { transform: rotate(68deg) } }
+@keyframes sway-8  { 0% { transform: rotate(94deg) }  40% { transform: rotate(136deg) } 100% { transform: rotate(82deg) } }
+
+/* ─── CSS Custom Properties ──────────────────────────────── */
+:root {
+   --clr-primary:   #674ea7;
+   --clr-accent:    #e25555;
+   --clr-pink:      #e25c67;
+   --clr-green:     #02a602;
+   --clr-text:      #564861;
+   --clr-date:      #e31e70;
+   --clr-place:     #eb2341;
+   --font-script:   'Dancing Script', cursive;
+   --font-serif:    'Arvo', serif;
+   --radius-btn:    16px;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────── */
+*, *::before, *::after {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+html {
+   font-size: 16px;
+   scroll-behavior: smooth;
+}
+
+body {
+   font-family: var(--font-serif);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   min-height: 100vh;
+   overflow-x: hidden;
+   background: #fff;
+   color: var(--clr-text);
+}
+
+/* ─── Sakura ─────────────────────────────────────────────── */
+.sakura {
+   background: var(--clr-primary);
+   pointer-events: none;
+   position: absolute;
+}
+
+/* ─── Corner Decorations ─────────────────────────────────── */
+.top-right-decoration,
+.top-left-decoration {
+   position: fixed;
+   top: 0;
+   display: block;
+   width: clamp(80px, 15vw, 140px);
+   height: auto;
+   pointer-events: none;
+   z-index: 0;
+}
+.top-right-decoration { right: 0; }
+.top-left-decoration  { left: 0; }
+
+/* ─── Responsive Images (global) ────────────────────────── */
+img {
+   max-width: 100%;
+   height: auto;
+   display: block;
+}
+
+/* ─── Main Wrapper ───────────────────────────────────────── */
+.wrap {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   width: 100%;
+   padding: clamp(60px, 10vw, 100px) clamp(16px, 5vw, 40px) 0;
+   position: relative;
+   z-index: 1;
+}
+
+/* ─── Title Block ────────────────────────────────────────── */
+.title {
+   width: 100%;
+   max-width: 640px;
+}
+
+.title h1 {
+   font-family: var(--font-script);
+   font-weight: 700;
+   font-size: clamp(40px, 10vw, 70px);
+   color: var(--clr-green);
+   line-height: 1.1;
+   margin: 20px 0;
+}
+
+.title h2 {
+   font-family: var(--font-script);
+   font-weight: 700;
+   font-size: clamp(20px, 5vw, 28px);
+   color: var(--clr-pink);
+   line-height: 1;
+}
+
+.title h3 {
+   font-weight: 300;
+   text-transform: uppercase;
+   letter-spacing: 4px;
+   font-size: clamp(14px, 3vw, 22px);
+   color: var(--clr-primary);
+   margin: 8px 0 0;
+}
+
+.detail-date,
+.detail-venue {
+   color: var(--clr-text);
+   text-transform: uppercase;
+   letter-spacing: 2px;
+   font-size: clamp(12px, 2.5vw, 15px);
+   line-height: 1.6;
+   margin-top: 16px;
+}
+
+.date  { color: var(--clr-date);  font-weight: 900; }
+.place { color: var(--clr-place); font-weight: 900; }
+
+.dance-med {
+   font-family: var(--font-script);
+   font-weight: 700;
+   font-size: clamp(20px, 5vw, 32px);
+   color: var(--clr-primary);
+   margin: 16px 0;
+   text-align: center;
+}
+
+/* ─── Countdown Timer ────────────────────────────────────── */
+#countdown {
+   margin: 12px 0 0;
+}
+
+.countdown-wrapper {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: clamp(8px, 2vw, 16px);
+   flex-wrap: wrap;
+}
+
+.countdown-card {
+   background: #fff;
+   border-radius: 14px;
+   box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+   width: clamp(68px, 18vw, 90px);
+   height: clamp(68px, 18vw, 90px);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   transition: transform 0.2s;
+}
+.countdown-card:hover { transform: translateY(-3px); }
+
+.countdown-card .num {
+   font-family: var(--font-serif);
+   font-size: clamp(1.4rem, 4vw, 2.2rem);
+   font-weight: 700;
+   color: var(--clr-accent);
+   line-height: 1;
+   letter-spacing: 1px;
+}
+
+.countdown-card .label {
+   font-family: var(--font-serif);
+   font-size: clamp(0.55rem, 1.5vw, 0.65rem);
+   font-weight: 600;
+   color: #888;
+   text-transform: uppercase;
+   letter-spacing: 1.5px;
+   margin-top: 6px;
+}
+
+/* ─── Action Buttons ─────────────────────────────────────── */
+.actions {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+   justify-content: center;
+   font-size: clamp(10px, 2.5vw, 13px);
+   letter-spacing: 0.5px;
+   margin: 18px 16px 14px;
+   position: relative;
+   z-index: 1;
+}
+
+.actions a { text-decoration: none; }
+
+.venue {
+   background-color: var(--clr-primary);
+   border-radius: var(--radius-btn);
+   color: #fff;
+   padding: 10px 18px;
+   white-space: nowrap;
+   cursor: pointer;
+   transition: background 0.2s, transform 0.15s;
+}
+.venue:hover {
+   background-color: #5a3f97;
+   transform: translateY(-2px);
+}
+.venue:active { transform: scale(0.97); }
+
+/* ─── Center Image ───────────────────────────────────────── */
+.center-image-wrap {
+   width: 100%;
+   max-width: 900px;
+   padding: 0 16px;
+   margin: 8px auto;
+}
+.center-image {
+   width: 100%;
+   height: auto;
+   border-radius: 8px;
+}
+
+/* ─── Photo Grid ─────────────────────────────────────────── */
+.containerw3 {
+   display: flex;
+   flex-wrap: wrap;
+   margin: 2.5px;
+   width: 100%;
+   max-width: 1200px;
+}
+.containerw3::after {
+   content: '';
+   flex-grow: 999999999;
+   min-width: 200px;
+   height: 0;
+}
+.containerw3 > a {
+   position: relative;
+   display: block;
+   height: clamp(160px, 25vw, 250px);
+   margin: 2.5px;
+   flex-grow: 1;
+   min-width: 140px;
+   overflow: hidden;
+}
+.containerw3 > a > img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   vertical-align: bottom;
+   transition: transform 0.3s ease;
+}
+.containerw3 > a:hover > img { transform: scale(1.04); }
+
+.containerw3-margin { margin: 2.5px; }
+
+/* ─── Music ──────────────────────────────────────────────── */
+.music { display: none; }
+
+/* ─── Contact Section ────────────────────────────────────── */
+.contact-section {
+   text-align: center;
+   padding: 16px 24px;
+   font-size: clamp(13px, 2.5vw, 16px);
+   font-weight: 600;
+   color: var(--clr-text);
+   line-height: 1.8;
+}
+.phone-link {
+   color: #874562;
+   text-decoration: none;
+   font-weight: 700;
+   white-space: nowrap;
+}
+.phone-link:hover { text-decoration: underline; }
+
+/* ─── Happiness / Social ─────────────────────────────────── */
+.happiness {
+   color: #874562;
+   font-size: clamp(18px, 4vw, 24px);
+   font-weight: bold;
+   text-align: center;
+   margin: 8px 0 24px;
+}
+.social-link {
+   color: #874562;
+   font-size: 28px;
+   transition: color 0.2s, transform 0.2s;
+   display: inline-block;
+   margin-top: 6px;
+}
+.social-link:hover {
+   color: var(--clr-primary);
+   transform: scale(1.15);
+}
+
+/* ─── Footer ─────────────────────────────────────────────── */
+.footer {
+   color: var(--clr-text);
+   text-align: center;
+   font-size: clamp(12px, 2.5vw, 16px);
+   margin: 16px 24px 24px;
+}
+.footer a {
+   text-decoration: none;
+   color: var(--clr-text);
+}
+.footer a:hover { text-decoration: underline; }
+
+/* ─── Hidden element (was #time) ────────────────────────── */
+#time { display: none; }
+
+/* ──────────────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+   ────────────────────────────────────────────────────────── */
+
+/* ── Large Desktop (≥1200px) ── */
+@media (min-width: 1200px) {
+   .top-right-decoration,
+   .top-left-decoration { width: 140px; }
+}
+
+/* ── Tablet (≤900px) ── */
+@media (max-width: 900px) {
+   .top-right-decoration,
+   .top-left-decoration { width: clamp(60px, 10vw, 100px); }
+}
+
+/* ── Small Tablet / Large Mobile (≤600px) ── */
+@media (max-width: 600px) {
+   .wrap { padding-top: 80px; }
+   .title h1 { font-size: clamp(36px, 12vw, 54px); }
+   .actions { flex-direction: column; align-items: center; }
+   .venue { width: 90vw; max-width: 320px; text-align: center; }
+   .containerw3 > a { min-width: 120px; height: 150px; }
+}
+
+/* ── Mobile (≤400px) ── */
+@media (max-width: 400px) {
+   .top-right-decoration,
+   .top-left-decoration { width: 60px; }
+   .title h1 { font-size: 36px; }
+   .title h3 { letter-spacing: 2px; font-size: 13px; }
+   .countdown-card { width: 64px; height: 64px; }
+   .countdown-card .num { font-size: 1.4rem; }
+   .actions { flex-direction: column; align-items: center; }
+   .venue { width: 85vw; max-width: 280px; }
+}
+
+/* ── Landscape Mobile ── */
+@media (max-height: 500px) and (orientation: landscape) {
+   .wrap { padding-top: 50px; }
+   .title h1 { font-size: 32px; margin: 10px 0; }
+   .countdown-card { width: 60px; height: 60px; }
+   .countdown-card .num { font-size: 1.2rem; }
+}
