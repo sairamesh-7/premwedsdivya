@@ -10,13 +10,27 @@
     }
 })(jQuery);
 
-/* ── Play audio on first interaction ───────────────────────── */
-$(document).one('click touchstart', function () {
+/* ── Auto Play Audio (with fallback) ───────────────────────── */
+window.addEventListener("load", function () {
     var audio = document.getElementById("my_audio");
+
     if (audio) {
-        audio.play().catch(function () { /* autoplay blocked — silent fail */ });
+        // Try autoplay
+        audio.play().then(function () {
+            console.log("Audio autoplay started 🎶");
+        }).catch(function () {
+            console.log("Autoplay blocked, waiting for user interaction...");
+
+            // Fallback: play on first click or touch
+            document.addEventListener("click", function () {
+                audio.play();
+            }, { once: true });
+
+            document.addEventListener("touchstart", function () {
+                audio.play();
+            }, { once: true });
+        });
     }
-    console.log('Kalyanathinu varane');
 });
 
 /* ── Countdown Timer ──────────────────────────────────────── */
@@ -73,4 +87,5 @@ var styles2 = ['color:teal','display:block','line-height:40px','font-weight:bold
 
 console.log('\n\n%c SAVE THE DATE: 7th May, 2026!', styles);
 console.log('%cYour presence is requested!%c\n\nWith love: Prem & Divya', styles1, styles2);
+console.log('%cKalyanathinu varane!\n\n', 'color:yellow;background:tomato;font-size:24pt;font-weight:bold');
 console.log('%cKalyanathinu varane!\n\n', 'color:yellow;background:tomato;font-size:24pt;font-weight:bold');
